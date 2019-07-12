@@ -1,5 +1,11 @@
 {
     "files.associations": {
         "*.js": "javascriptreact"
-    }
+    },
+    "cSpell.words": [
+        "mapbox"
+    ],
+    "cSpell.ignoreWords": [
+        "pjsa"
+    ]
 }
