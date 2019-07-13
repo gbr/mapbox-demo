@@ -1,15 +1,10 @@
 import React from 'react'
 import mapbox from 'mapbox-gl'
 
+import { goTo } from '../helpers'
+
 const PlaceItem = props => {
     const { map, place } = props
-
-    const goTo = () => {
-        map.flyTo({
-            center: place.center,
-            zoom: 10
-        })
-    }
 
     if (map) {
         const popup = new mapbox.Popup({
@@ -22,6 +17,7 @@ const PlaceItem = props => {
             color: '#2727e6'
         })
 
+        console.log(place)
         marker.setLngLat(place.center)
         marker.setPopup(popup)
 
@@ -30,7 +26,7 @@ const PlaceItem = props => {
     return (
         <div
             className="place-item"
-            onClick={() => goTo()}
+            onClick={() => goTo(place)}
         >
             <div>
                 {place.name}

@@ -1,35 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import { fetchQuery, goTo } from '../helpers'
 
 import '../styles/Search.css'
 
 const Search = props => {
+    const { map, places, setPlaces } = props
     const [query, setQuery] = useState('')
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        const fetchStartingPlace = async () => {
+            const newPlace =
+                await fetchQuery('San Francisco')
+            if (map) goTo(map, newPlace)
+            setPlaces([newPlace])
+        }
+        fetchStartingPlace()
+    }, [map, setPlaces])
+
+    const handleSubmit = (event, query) => {
         event.preventDefault()
 
-        const accessToken = 'pk.eyJ1Ijoic2lvbnlkdXMiLCJhIjoiY2p4ejM0bDEyMDBiMTNtb3pzYWhtMTJiMiJ9.ob1jCnbAVfX3kPjsa1C9tA'
-        const url = `http://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const places = [...props.places]
-
-                places.push({
-                    name: query,
-                    center: data.features[0].center
-                })
-
-                props.setPlaces(places)
-
-                setQuery('')
-            })
-
+        const fetchNewPlace = async () => {
+            const newPlace = await fetchQuery(query)
+            goTo(map, newPlace)
+            setPlaces([...places, newPlace])
+            setQuery('')
+        }
+        fetchNewPlace()
     }
 
     return (
-        <form action="" onSubmit={handleSubmit}>
+        <form
+            action=""
+            onSubmit={event => handleSubmit(event, query)}>
             <input
                 value={query}
                 onChange={event => setQuery(event.target.value)}

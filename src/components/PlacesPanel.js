@@ -17,8 +17,6 @@ const PlacesPanel = props => {
             <div className="no-results">Nothing added yet</div>
     }
 
-    console.log(placeItems)
-
     return (
         <div className="places">
             {placeItems}

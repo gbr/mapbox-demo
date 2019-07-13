@@ -9,10 +9,7 @@ import styles from '../data/styles'
 
 import '../styles/App.css';
 
-// TODO
-// 2. Prettify the PlaceItem output
-// 3. Mess around with the mapbox API and add more features...
-
+// TODO mess around with the mapbox API and add more features...
 
 const App = () => {
   const [map, setMap] = useState(null)
@@ -23,11 +20,11 @@ const App = () => {
   return (
     <div className="App">
       <PlacesPanel map={map} places={places} />
-      <Search places={places} setPlaces={setPlaces} />
+      <Search map={map} places={places} setPlaces={setPlaces} />
       <Toggler style={style} setStyle={setStyle} />
       <Map map={map} setMap={setMap} style={style} />
     </div>
-  );
+  )
 }
 
 export default App;
