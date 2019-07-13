@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-// import mapbox from 'mapbox-gl'
 
 import Map from './Map'
 import PlacesPanel from './PlacesPanel'
 import Search from './Search'
 import Toggler from './Toggler'
 
-import './App.css';
+import styles from '../data/styles'
+
+import '../styles/App.css';
 
 // TODO
 // 2. Prettify the PlaceItem output
@@ -15,7 +16,8 @@ import './App.css';
 
 const App = () => {
   const [map, setMap] = useState(null)
-  const [style, setStyle] = useState('mapbox://styles/mapbox/dark-v9')
+  const [style, setStyle] =
+    useState(styles.find(el => el.name === 'Dark').url)
   const [places, setPlaces] = useState([])
 
   return (

@@ -1,23 +1,9 @@
 import React from 'react'
 
-import './Toggler.css'
+import styles from '../data/styles'
+import '../styles/Toggler.css'
 
 const Toggler = props => {
-    const styles = [
-        {
-            name: 'Satellite',
-            url: 'mapbox://styles/mapbox/satellite-v9'
-        },
-        {
-            name: 'Dark',
-            url: 'mapbox://styles/mapbox/dark-v9'
-        },
-        {
-            name: 'Light',
-            url: 'mapbox://styles/mapbox/light-v9'
-        },
-    ]
-
     const buttons = styles.map((style, index) => {
         let className = ""
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import PlaceItem from './PlaceItem'
 
-import './PlacesPanel.css'
+import '../styles/PlacesPanel.css'
 
 const PlacesPanel = props => {
     const { places, map } = props
