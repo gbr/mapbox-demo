@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import mapbox from 'mapbox-gl'
 
 import Map from './Map'
 import PlacesPanel from './PlacesPanel'
@@ -13,16 +14,16 @@ import './App.css';
 
 
 const App = () => {
-  // const [map, setMap] = useState(null)
+  const [map, setMap] = useState(null)
   const [style, setStyle] = useState('mapbox://styles/mapbox/dark-v9')
   const [places, setPlaces] = useState([])
 
   return (
     <div className="App">
-      <PlacesPanel places={places} />
+      <PlacesPanel map={map} places={places} />
       <Search places={places} setPlaces={setPlaces} />
       <Toggler style={style} setStyle={setStyle} />
-      <Map style={style} />
+      <Map map={map} setMap={setMap} style={style} />
     </div>
   );
 }

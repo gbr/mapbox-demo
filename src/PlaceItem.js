@@ -6,10 +6,7 @@ const PlaceItem = props => {
         const map = props.map
 
         map.flyTo({
-            center: [
-                props.place.longitude,
-                props.place.latitude
-            ],
+            center: props.place.center,
             zoom: 10
         })
     }
@@ -28,7 +25,7 @@ const PlaceItem = props => {
             color: '#2727e6'
         })
 
-        marker.setLngLat([place.longitude, place.latitude])
+        marker.setLngLat(place.center)
         marker.setPopup(popup)
 
         marker.addTo(map)
@@ -42,7 +39,7 @@ const PlaceItem = props => {
                 {place.name}
             </div>
             <div>
-                ({place.latitude}, {place.longitude})
+                ({place.center[1]}, {place.center[0]})
                 </div>
         </div >
     )

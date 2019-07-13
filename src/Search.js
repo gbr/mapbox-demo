@@ -4,7 +4,6 @@ import './Search.css'
 
 const Search = props => {
     const [query, setQuery] = useState('')
-    // const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -15,8 +14,7 @@ const Search = props => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-
-                const places = props.places
+                const places = [...props.places]
 
                 places.push({
                     name: query,

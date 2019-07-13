@@ -1,40 +1,39 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import mapbox from 'mapbox-gl'
 
 import './Map.css'
 
-
-const Map = props => {
-    console.log(props)
+class Map extends React.Component {
 
     // useEffect(() => {
-    mapbox.accessToken = 'pk.eyJ1Ijoic2lvbnlkdXMiLCJhIjoiY2p4ejM0bDEyMDBiMTNtb3pzYWhtMTJiMiJ9.ob1jCnbAVfX3kPjsa1C9tA';
+    componentDidMount() {
+        mapbox.accessToken = 'pk.eyJ1Ijoic2lvbnlkdXMiLCJhIjoiY2p4ejM0bDEyMDBiMTNtb3pzYWhtMTJiMiJ9.ob1jCnbAVfX3kPjsa1C9tA';
 
-    const map = new mapbox.Map({
-        container: 'map',
-        style: props.style,
-        center: [-74.0060, 30.7128],
-        zoom: 1,
+        const map = new mapbox.Map({
+            container: 'map',
+            center: [-73.9808, 40.7648],
+            zoom: 6,
+            style: this.props.style,
 
-    });
+        });
 
-    const navigationControl =
-        new mapbox.NavigationControl()
-    map.addControl(navigationControl)
-
-    // props.setMap(map)
-    // return
-    // })
-
-    if (map) {
-        map.setStyle(props.style)
+        const navigationControl =
+            new mapbox.NavigationControl()
+        map.addControl(navigationControl)
+        this.props.setMap(map)
     }
 
-    return (
-        <div id="map">
 
-        </div >
-    )
+    render() {
+
+        if (this.props.map) {
+            this.props.map.setStyle(this.props.style)
+        }
+
+        return (
+            <div id="map" />
+        )
+    }
 }
 
 export default Map
