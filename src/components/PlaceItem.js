@@ -17,7 +17,6 @@ const PlaceItem = props => {
             color: '#2727e6'
         })
 
-        console.log(place)
         marker.setLngLat(place.center)
         marker.setPopup(popup)
 

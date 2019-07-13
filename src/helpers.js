@@ -12,7 +12,7 @@ export const goTo = (map, place) => {
 export const fetchQuery = async (query = '') => {
     const accessToken = defaultPublicAccessToken
     const url =
-        `http://api.mapbox.com/geocoding/v5/mapbox.places/
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/
             ${query}.json?access_token=${accessToken}`
 
     const { data } = await axios(url)
