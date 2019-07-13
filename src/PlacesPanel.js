@@ -1,27 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import PlaceItem from './PlaceItem'
 
 import './PlacesPanel.css'
 
-class PlacesPanel extends Component {
-    render() {
-        const places = this.props.app.state.places
-        let placeItems =
-            <div className="no-results">Nothing added yet</div>
+const PlacesPanel = props => {
+    let placeItems =
+        <div className="no-results">Nothing added yet</div>
 
-        if (places.length > 0) {
-            placeItems = places.map((place, idx) => (
-                <PlaceItem app={this.props.app} place={place} key={idx} />
-            ))
-        }
-
-        return (
-            <div className="places">
-                {placeItems}
-            </div>
-        )
+    if (props.places.length > 0) {
+        placeItems = props.places.map((place, idx) => (
+            <PlaceItem place={place} key={idx} />
+        ))
     }
+
+    return (
+        <div className="places">
+            {placeItems}
+        </div>
+    )
 }
 
 export default PlacesPanel

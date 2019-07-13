@@ -1,66 +1,45 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import './Search.css'
 
-export default class Search extends Component {
-    constructor(props) {
-        super(props)
+const Search = props => {
+    const [query, setQuery] = useState('')
+    // const [isLoading, setIsLoading] = useState(false)
 
-        this.state = {
-            value: '',
-            isLoading: false
-        }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    handleChange(event) {
-        this.setState({
-            value: event.target.value
-        })
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault()
 
         const accessToken = 'pk.eyJ1Ijoic2lvbnlkdXMiLCJhIjoiY2p4ejM0bDEyMDBiMTNtb3pzYWhtMTJiMiJ9.ob1jCnbAVfX3kPjsa1C9tA'
-        const url = `http://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.value}.json?access_token=${accessToken}`
+        const url = `http://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}`
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
 
-                const places = this.props.app.state.places
-                const firstResult = data.features[0]
+                const places = props.places
 
                 places.push({
-                    name: this.state.value,
-                    longitude: firstResult.center[0],
-                    latitude: firstResult.center[1],
+                    name: query,
+                    center: data.features[0].center
                 })
 
-                this.props.app.setState({
-                    places: places
-                })
+                props.setPlaces(places)
 
-                this.setState({
-                    value: ''
-                })
+                setQuery('')
             })
 
     }
 
-    render() {
-        return (
-            <form action="" onSubmit={this.handleSubmit}>
-                <input
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    placeholder="Add place..."
-                    type="text"
-                />
-            </form>
-        )
-    }
+    return (
+        <form action="" onSubmit={handleSubmit}>
+            <input
+                value={query}
+                onChange={event => setQuery(event.target.value)}
+                placeholder="Add place..."
+                type="text"
+            />
+        </form>
+    )
 }
+
+export default Search

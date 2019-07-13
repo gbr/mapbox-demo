@@ -1,53 +1,51 @@
-import React, { Component } from 'react'
+import React from 'react'
 import mapbox from 'mapbox-gl'
 
-export default class PlaceItem extends Component {
-    goTo() {
-        const app = this.props.app
-        const map = app.state.map
-
-        const place = this.props.place
+const PlaceItem = props => {
+    const goTo = () => {
+        const map = props.map
 
         map.flyTo({
-            center: [place.longitude, place.latitude],
+            center: [
+                props.place.longitude,
+                props.place.latitude
+            ],
             zoom: 10
         })
     }
 
-    render() {
-        const app = this.props.app
-        const map = app.state.map
+    const map = props.map
+    const place = props.place
 
-        const place = this.props.place
+    if (map) {
+        const popup = new mapbox.Popup({
+            closeButton: false
+        })
 
-        if (map) {
-            const popup = new mapbox.Popup({
-                closeButton: false
-            })
+        popup.setHTML(place.name)
 
-            popup.setHTML(place.name)
+        const marker = new mapbox.Marker({
+            color: '#2727e6'
+        })
 
-            const marker = new mapbox.Marker({
-                color: '#2727e6'
-            })
+        marker.setLngLat([place.longitude, place.latitude])
+        marker.setPopup(popup)
 
-            marker.setLngLat([place.longitude, place.latitude])
-            marker.setPopup(popup)
-
-            marker.addTo(map)
-        }
-        return (
-            <div
-                className="place-item"
-                onClick={() => this.goTo()}
-            >
-                <div>
-                    {place.name}
-                </div>
-                <div>
-                    ({place.latitude} {place.longitude})
-                </div>
-            </div >
-        )
+        marker.addTo(map)
     }
+    return (
+        <div
+            className="place-item"
+            onClick={() => goTo()}
+        >
+            <div>
+                {place.name}
+            </div>
+            <div>
+                ({place.latitude}, {place.longitude})
+                </div>
+        </div >
+    )
 }
+
+export default PlaceItem
