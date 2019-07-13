@@ -5,12 +5,12 @@ import PlaceItem from './PlaceItem'
 import './PlacesPanel.css'
 
 const PlacesPanel = props => {
+    const { places, map } = props
     let placeItems
 
-    console.log(props.places)
-    if (props.places.length > 0) {
-        placeItems = props.places.map((place, idx) => (
-            <PlaceItem map={props.map} place={place} key={idx} />
+    if (places.length > 0) {
+        placeItems = places.map((place, idx) => (
+            <PlaceItem map={map} place={place} key={idx} />
         ))
     } else {
         placeItems =

@@ -2,17 +2,14 @@ import React from 'react'
 import mapbox from 'mapbox-gl'
 
 const PlaceItem = props => {
-    const goTo = () => {
-        const map = props.map
+    const { map, place } = props
 
+    const goTo = () => {
         map.flyTo({
-            center: props.place.center,
+            center: place.center,
             zoom: 10
         })
     }
-
-    const map = props.map
-    const place = props.place
 
     if (map) {
         const popup = new mapbox.Popup({
