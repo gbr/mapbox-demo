@@ -1,0 +1,3 @@
+const defaultPublicAccessToken = 'pk.eyJ1Ijoic2lvbnlkdXMiLCJhIjoiY2p4ejM0bDEyMDBiMTNtb3pzYWhtMTJiMiJ9.ob1jCnbAVfX3kPjsa1C9tA'
+
+export default defaultPublicAccessToken
